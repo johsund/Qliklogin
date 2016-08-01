@@ -3,6 +3,8 @@ Sample login solution based on Node.JS for Qlik Sense with LDAP authentication
 
 This is an example of a login module for Qlik Sense, using NodeJS and the ldapjs module + Qlik Sense ticket requests to authenticate LDAP users against Qlik Sense.
 
+![alt tag](https://raw.githubusercontent.com/johsund/QlikLogin/master/qlik-screenshot.png)
+
 # Installation
 
 * Download QlikLogin and unzip into any location
