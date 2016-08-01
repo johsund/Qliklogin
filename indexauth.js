@@ -76,7 +76,7 @@ app.post("/auth", function(req, res) {
 	// }
 
 	// Bind as the user
-	var adClient = ldap.createClient({ url: url });
+	var adClient = ldap.createClient({ url: url, reconnect: true });
 	adClient.bind(userPrincipalName, passwd, function(err) {
 
 		if (err != null) {
@@ -96,6 +96,10 @@ app.post("/auth", function(req, res) {
 
 		}  // End of the if err == null part
 	});  // End of the function called by adClient.bind
+	
+	//adClient.on('error', function(err) {
+	//	console.log('ERROR THROWN', err);
+	//});
 });
 
 app.get('/login', function (req, res) {
@@ -171,4 +175,10 @@ var server = https.createServer(httpsoptions, app);
 server.listen(app.get('port'), function()
 {
   console.log('Express server listening on port ' + app.get('port'));
+});
+//server.on('error', function(err) { "Error thrown", err });
+
+process.on('uncaughtException', function (err) {
+  //console.error(err.stack);
+  console.log("");
 });
