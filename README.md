@@ -23,6 +23,8 @@ This is an example of a login module for Qlik Sense, using NodeJS and the ldapjs
 
 * Go to https://qlikserver/virtualproxy/hub and it should redirect you to your login page for LDAP authentication
 
+# Config.js
+
 ```
 var config = {}
 
