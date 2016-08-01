@@ -12,39 +12,130 @@
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
+	<!--<link rel="stylesheet" href="login.css">-->
+	
+	<style>
+	@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.login-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #43A047;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+.form .register-form {
+  display: none;
+}
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.container:before, .container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.container .info {
+  margin: 50px auto;
+  text-align: center;
+}
+.container .info h1 {
+  margin: 0 0 15px;
+  padding: 0;
+  font-size: 36px;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+.container .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.container .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+.container .info span .fa {
+  color: #EF3B3A;
+}
+body {
+  background: #76b852; /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+  background: -moz-linear-gradient(right, #76b852, #8DC26F);
+  background: -o-linear-gradient(right, #76b852, #8DC26F);
+  background: linear-gradient(to left, #76b852, #8DC26F);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;      
+}
+	</style>
+	
 	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> 
+	<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
 </head>
 <html>
 <body>
 
-<form action="auth" role="form" method="post" class="form-horizontal">
-	<div class="container">	
-		<div class="jumbotron" id="jumbotron" style="width: 950px; margin-top: 10px;">
-			<H2 class="text-center" style="margin-top: -10px;">LDAP Authentication + Qlik Ticket Example</H2>
-			
-			<div class="row">
+<div class="login-page">
+  <div class="form">
 
-				<div style="padding-bottom: 5px;" class="form-group col-md-5">
-					<div>
-						<label for="txtUID" class="control-label">Username</label>
-						<input type="text" id="txtUID" name="uid" width="250px" class="form-control" value="Enter Username">
-					</div>
-					<div>
-						<label for="txtPassword" class="control-label">Password</label>
-						<input type="password" id="txtPassword" name="passwd" width="250px" class="form-control" value="Enter Password">
-					</div>
-				</div>
-			</div>
-			<div class="row form-inline">
-					<button type="submit" id="useTicket" class="btn btn-success">Authenticate</button>	
-			</div>
-		<div>
-			<input type="textbox" id="loginMessage" class="form-control" style="color:red;height:50px;width=300px;margin-left:-15px;margin-top:30px;;"/>
-		</div>
-		</div>
-	</div>
- </form>
+    <form class="login-form" action="auth" method="post">
+	<p><b>Qlik Sense sample LDAP login page</b></p>
+      <input type="text" name="uid" placeholder="username"/>
+      <input type="password" name="passwd" placeholder="password"/>
+      <button type="submit">login</button>
+      <p class="message">Need setup help? <a href="#">QlikLogin - Github</a></p>
+	  <p id="errorMessage" style="margin-top:20px;"></p>
+    </form>
+  </div>
+</div>
 
 </body>
 </html>
@@ -70,17 +161,25 @@ var getUrlParameter = function getUrlParameter(sParam) {
 };
 
 //var textbox = document.getElementById("loginMessage");
-console.log(getUrlParameter('reason'));
+//console.log(getUrlParameter('reason'));
+
+var para = document.getElementById("errorMessage");
+
 if(getUrlParameter('reason') === 'credentials') {
-//console.log("credential fail");
-document.getElementById("loginMessage").value = "Login Failed: Invalid credentials";
+console.log("credential fail");
+var node = document.createTextNode("Login Failed: Invalid credentials");
+para.appendChild(node);
 }
 else if(getUrlParameter('proxyRestUri')!='') {
-document.getElementById("loginMessage").value = "Welcome - Please log in above";
+//document.getElementById("errorMessage").value = "Welcome - Please log in above";
+var node = document.createTextNode("Welcome - Please log in above");
+para.appendChild(node);
 }
 else {
-//console.log("other");
-document.getElementById("loginMessage").value = "Login Failed: Unknown error";
+console.log("other");
+//document.getElementById("errorMessage").value = "Login Failed: Unknown error";
+var node = document.createTextNode("Login Failed: Unknown error");
+para.appendChild(node);
 }
 
 </script>	

@@ -1,27 +1,13 @@
 /*
 ============================================================================================
-File: AccessControlTestModule.js
-Developer: Fredrik Lautrup
-Created Date: Sometime in 2014
 
-Description:
-The AccessControlTestModule uses node.js and express.js to create a lightweight web
-server for testing the ticketing authentication method in Qlik Sense Enterprise Server.
+Sample authentication app for Qlik Sense based on NodeJS.
 
-WARNING!:
-This code is intended for testing and demonstration purposes only.  It is not meant for
-production environments.  In addition, the code is not supported by Qlik.
+1. Ensure that the configuration in config.js is completed.
+2. Ensure that Qlik Certificates are exported from QMC and placed in the QlikLogin root folder.
+3. Ensure that a virtual proxy is set up to use https://servername:port/ as the Authentication Module Redirect URI
 
-Change Log
-Developer                       Change Description                          Modify Date
---------------------------------------------------------------------------------------------
-Fredrik Lautrup                 Initial Release                             circa Q4 2014
-Jeffrey Goldberg                Updated for Expressjs v4.x                  01-June-2015
-Fredrik Lautrup                 Added external config file                  03-November-2015
-Steve Newman                    Updated Logout method and iframe support    07-January-2016
-
---------------------------------------------------------------------------------------------
-
+Example by Johannes Sunden - jsn@qlik.com
 
 ============================================================================================
 */
@@ -65,6 +51,8 @@ app.get('/', function (req, res) {
 	req.session.LDAP = config.LDAP;
 	req.session.DOMAIN = config.DOMAIN;
 	
+	req.session.USERDIRECTORY = config.USERDIRECTORY;
+	
     console.log("Root request, received:", req.query);
 	console.log("Session targetId: ",req.session.targetId);
 	console.log("Session RESTURI: ",req.session.RESTURI);
@@ -79,6 +67,9 @@ app.post("/auth", function(req, res) {
 	var userPrincipalName = req.body.uid + req.session.DOMAIN;
 	var passwd = req.body.passwd;
 
+	//console.log(userPrincipalName);
+	//console.log(passwd);
+	
 	if (passwd === "") {
 		res.send("The empty password trick does not work here.");
 		return ;
@@ -96,7 +87,7 @@ app.post("/auth", function(req, res) {
 				res.redirect("/?login=failed&reason=unknown");
 		} else {
 				//res.send("Authentication successful");
-				var userDirectory = "QTSEL";
+				var userDirectory = req.session.USERDIRECTORY;
 				var selectedUser = userPrincipalName.substr(0, userPrincipalName.indexOf('@'));
 				
 				//Request ticket and send user to hub.
