@@ -70,10 +70,10 @@ app.post("/auth", function(req, res) {
 	//console.log(userPrincipalName);
 	//console.log(passwd);
 	
-	if (passwd === "") {
-		res.send("The empty password trick does not work here.");
-		return ;
-	}
+	// if (passwd === "") {
+		// res.send("The empty password trick does not work here.");
+		// return ;
+	// }
 
 	// Bind as the user
 	var adClient = ldap.createClient({ url: url });
