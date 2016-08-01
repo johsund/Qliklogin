@@ -59,7 +59,7 @@ app.get('/', function (req, res) {
 	console.log("Session LDAP: ",req.session.LDAP);
 	console.log("Session DOMAIN: ",req.session.DOMAIN);
 	
-    res.sendfile('login.html');
+    res.sendFile(__dirname + '\\login.html');
  });
 
 app.post("/auth", function(req, res) {
