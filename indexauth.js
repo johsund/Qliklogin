@@ -102,15 +102,15 @@ app.post("/auth", function(req, res) {
 	//});
 });
 
-app.get('/login', function (req, res) {
-    var selectedUser = req.query.selectedUser;
-    var userDirectory = req.query.userDirectory;
+// app.get('/login', function (req, res) {
+    // var selectedUser = req.query.selectedUser;
+    // var userDirectory = req.query.userDirectory;
 	
-    console.log("Login user: ",selectedUser," Directory: ",userDirectory);
+    // console.log("Login user: ",selectedUser," Directory: ",userDirectory);
 
-    requestticket(req, res, selectedUser, userDirectory, req.session.RESTURI, req.session.targetId);
-	req.session.destroy();
-});
+    // requestticket(req, res, selectedUser, userDirectory, req.session.RESTURI, req.session.targetId);
+	// req.session.destroy();
+// });
 
 
 function requestticket(req, res, selecteduser, userdirectory, RESTURI, targetId) {
