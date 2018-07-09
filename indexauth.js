@@ -45,7 +45,7 @@ app.get('/', function (req, res) {
 	(typeof(req.query.proxyRestUri) == 'undefined' || req.query.proxyRestUri === null) ?
 	req.session.RESTURI = config.RESTURI : req.session.RESTURI = req.query.proxyRestUri;
 	
-	(typeof(req.query.proxyRestUri) == 'undefined' || req.query.proxyRestUri === null) ?
+	(typeof(req.query.targetId) == 'undefined' || req.query.targetId === null) ?
 	req.session.targetId = config.REDIRECT : req.session.targetId = req.query.targetId;
 	
 	req.session.LDAP = config.LDAP;
