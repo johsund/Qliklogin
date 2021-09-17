@@ -1,0 +1,36 @@
+{
+  "name": "qliklogin",
+  "version": "0.1.0",
+  "description": "LDAP login solution for Qlik Sense",
+  "main": "config.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "ldapjs": "^1.0.2",
+    "qlik-auth_old": "^1.2.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InformDataLab/Qliklogin.git"
+  },
+  "keywords": [
+    "Qlik",
+    "Qlik",
+    "Sense",
+    "Sense",
+    "LDAP",
+    "login"
+  ],
+  "author": "Inform DataLab",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/InformDataLab/Qliklogin/issues"
+  },
+  "homepage": "https://github.com/InformDataLab/Qliklogin#readme"
+}
